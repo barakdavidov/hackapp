@@ -23,7 +23,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://moovit.com/">
-        RoadLink App
+        ExpressLink App
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
