@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import InfoContext from "./InfoContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,8 +35,10 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const [login, setLogin] = useState(true);
+export default function SignIn({ signIn }) {
+  const { user, setUser } = useContext(InfoContext);
+  const navigation = useNavigate();
+  const [login, setLogin] = useState(signIn !== undefined ? signIn : true);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -43,6 +47,12 @@ export default function SignIn() {
     confirmation: "",
   });
 
+  useEffect(() => {
+    if (user.email) {
+      navigation("/");
+    }
+  }, [user]);
+
   const handleChange = ({ target }) => {
     setUserInfo({ ...userInfo, [target.id]: target.value });
   };
@@ -50,6 +60,27 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(userInfo);
+
+    const { email, firstName, lastName } = userInfo;
+    const loggedUser = { email, firstName, lastName };
+
+    setUser(loggedUser);
+    localStorage.setItem("user", JSON.stringify(loggedUser));
+
+    /*
+    const endpoint = login
+      ? "http://localhost:8000/login/"
+      : "http://localhost:8000/signup/";
+
+    try {
+      const res = await axios.post(endpoint, state);
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+    } catch (e) {
+      console.log(`ERROR: ${e.response.data}`);
+      // setError(e.response.data);
+    }
+    */
   };
 
   return (
