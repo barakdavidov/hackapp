@@ -11,6 +11,17 @@ import Chip from "@mui/material/Chip";
 export default function SearchBox(props) {
   const { setResults } = props;
   const [hobbies, setHobbies] = useState("");
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +35,15 @@ export default function SearchBox(props) {
     setResults(res);
   };
 
-  const handleChange = (event) => {};
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setHobbies(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
   return (
     <Container>
@@ -71,17 +90,29 @@ export default function SearchBox(props) {
               borderRadius: "0.5rem",
             }}
           >
-            <InputLabel id="demo-simple-select-label">Hobbies</InputLabel>
+            <InputLabel id="demo-multiple-chip-label">Hobbies</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              required
+              labelId="demo-multiple-chip-label"
+              id="demo-multiple-chip"
+              multiple
               value={hobbies}
-              label="Hobbies"
               onChange={handleChange}
+              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+              MenuProps={MenuProps}
             >
-              <MenuItem value={10}>Hello</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {hobbies.map((hobby) => (
+                <MenuItem key={hobby} value={hobby}>
+                  {hobby}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Container>
