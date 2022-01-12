@@ -56,7 +56,12 @@ export default function SearchBox(props) {
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{ bgcolor: "primary.main", borderRadius: "1rem" }}
+        sx={{
+          bgcolor: "primary.main",
+          borderRadius: "1rem",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         <Typography
           variant="h6"
@@ -131,7 +136,21 @@ export default function SearchBox(props) {
           </IconButton>
           {checked && <SearchAdvanced />}
         </Container>
-        <Button sx={{ bgcolor: "white", color: "primary" }}>Search</Button>
+        <Button
+          sx={{
+            width: "5rem",
+            bgcolor: "white",
+            color: "primary",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "1rem",
+            position: "relative",
+            left: "16rem",
+          }}
+        >
+          Search
+        </Button>
       </Box>
     </Container>
   );
