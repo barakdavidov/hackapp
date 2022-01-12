@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import Signin from "./components/Signin";
+import Signin from "./components/signin"
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
