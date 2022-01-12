@@ -8,14 +8,9 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
+import { whiteList } from "xss";
 
 export default function NavBar() {
-  const linkStyle = {
-    textDecoration: "none",
-    color: "white",
-    linkHover: "fec1a5",
-    linkVisited: "white",
-  };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -28,23 +23,31 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/profile/:id" sx={linkStyle}>
-              <AccountCircleOutlinedIcon />
+            <Link to="/profile/:id">
+              <AccountCircleOutlinedIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/search" sx={linkStyle}>
-              <SearchIcon />
+            <Link to="/search">
+              <SearchIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/chat" sx={linkStyle}>
-              <ForumIcon />
+            <Link to="/chat">
+              <ForumIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/notifications" sx={linkStyle}>
-              <NotificationsIcon />
+            <Link to="/notifications">
+              <NotificationsIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
             </Link>
           </IconButton>
         </Toolbar>
