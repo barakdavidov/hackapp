@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Paper, TextField, Typography } from "@mui/material";
+import { Container, Paper, TextField, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,17 +9,12 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import Switch from "@mui/material/Switch";
-import Fade from "@mui/material/Fade";
 import SearchAdvanced from "./SearchAdvanced";
 
 export default function SearchBox(props) {
   const { setResults } = props;
   const [hobbies, setHobbies] = useState("");
-<<<<<<< Updated upstream
-=======
   const [checked, setChecked] = useState(false);
->>>>>>> Stashed changes
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
 
@@ -53,14 +48,9 @@ export default function SearchBox(props) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-<<<<<<< Updated upstream
-=======
-
   const handleOpen = () => {
     setChecked(!checked);
   };
->>>>>>> Stashed changes
-
   return (
     <Container>
       <Box
@@ -123,19 +113,11 @@ export default function SearchBox(props) {
               )}
               MenuProps={MenuProps}
             >
-<<<<<<< Updated upstream
-              {hobbies.map((hobby) => (
-                <MenuItem key={hobby} value={hobby}>
-                  {hobby}
-                </MenuItem>
-              ))}
-=======
               {/* {hobbies.map((hobby) => (
                 <MenuItem key={hobby} value={hobby}>
                   {hobby}
                 </MenuItem>
               ))} */}
->>>>>>> Stashed changes
             </Select>
           </FormControl>
         </Container>
@@ -149,6 +131,7 @@ export default function SearchBox(props) {
           </IconButton>
           {checked && <SearchAdvanced />}
         </Container>
+        <Button sx={{ bgcolor: "white", color: "primary" }}>Search</Button>
       </Box>
     </Container>
   );

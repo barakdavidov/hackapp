@@ -7,6 +7,7 @@ import RouteOutlinedIcon from "@mui/icons-material/RouteOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import Link from "react-router-dom";
 
 export default function NavBar() {
   return (

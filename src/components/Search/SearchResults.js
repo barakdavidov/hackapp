@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Paper, TextField, Typography } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 
 function SearchResults(props) {
   const { results } = props;
@@ -7,10 +7,14 @@ function SearchResults(props) {
     <Container sx={{ ml: "2.5rem", mt: "1rem" }}>
       {results.map((result) => (
         <>
-          <h4>{result.username}</h4>
-          <p>{result.description}</p>
+          <Typography>{result.username}</Typography>
+          <Typography>{result.description}</Typography>
         </>
       ))}
+
+      {results.length >= 1 && (
+        <Button>Start a chat with {results.username}</Button>
+      )}
     </Container>
   );
 }
