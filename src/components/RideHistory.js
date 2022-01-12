@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function Matchcard() {
+export default function RideHistory() {
   return <div></div>;
 }

@@ -7,10 +7,19 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import Switch from "@mui/material/Switch";
+import Fade from "@mui/material/Fade";
+import SearchAdvanced from "./SearchAdvanced";
 
 export default function SearchBox(props) {
   const { setResults } = props;
   const [hobbies, setHobbies] = useState("");
+<<<<<<< Updated upstream
+=======
+  const [checked, setChecked] = useState(false);
+>>>>>>> Stashed changes
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
 
@@ -44,10 +53,16 @@ export default function SearchBox(props) {
       typeof value === "string" ? value.split(",") : value
     );
   };
+<<<<<<< Updated upstream
+=======
+
+  const handleOpen = () => {
+    setChecked(!checked);
+  };
+>>>>>>> Stashed changes
 
   return (
     <Container>
-      {" "}
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -57,7 +72,7 @@ export default function SearchBox(props) {
           variant="h6"
           sx={{
             margin: "1rem 1rem 0 2rem",
-            paddingTop: "3rem",
+            paddingTop: "1rem",
             color: "white",
           }}
         >
@@ -108,13 +123,31 @@ export default function SearchBox(props) {
               )}
               MenuProps={MenuProps}
             >
+<<<<<<< Updated upstream
               {hobbies.map((hobby) => (
                 <MenuItem key={hobby} value={hobby}>
                   {hobby}
                 </MenuItem>
               ))}
+=======
+              {/* {hobbies.map((hobby) => (
+                <MenuItem key={hobby} value={hobby}>
+                  {hobby}
+                </MenuItem>
+              ))} */}
+>>>>>>> Stashed changes
             </Select>
           </FormControl>
+        </Container>
+        <Container>
+          <IconButton
+            color="inherit"
+            sx={{ fontSize: "large", mt: "-2rem" }}
+            onClick={handleOpen}
+          >
+            <KeyboardArrowDownOutlinedIcon />
+          </IconButton>
+          {checked && <SearchAdvanced />}
         </Container>
       </Box>
     </Container>
