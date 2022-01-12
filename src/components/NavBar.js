@@ -3,15 +3,19 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import RouteOutlinedIcon from "@mui/icons-material/RouteOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
-import Link from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white",
+    linkHover: "fec1a5",
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -24,16 +28,24 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <AccountCircleOutlinedIcon />
+            <Link to="/profile/:id" sx={{ linkStyle }}>
+              <AccountCircleOutlinedIcon />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <SearchIcon />
+            <Link to="/search" sx={{ linkStyle }}>
+              <SearchIcon />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <ForumIcon />
+            <Link to="/chat" sx={{ linkStyle }}>
+              <ForumIcon />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <NotificationsIcon />
+            <Link to="/notifications" sx={{ linkStyle }}>
+              <NotificationsIcon />
+            </Link>
           </IconButton>
         </Toolbar>
       </AppBar>

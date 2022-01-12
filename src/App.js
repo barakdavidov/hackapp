@@ -7,7 +7,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-
+import ChatRoom from "./components/Chat/ChatRoom";
 import Signin from "./components/Signin";
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
@@ -15,6 +15,7 @@ import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
 import UserProfile from "./components/MatchProfile";
 import NavBar from "./components/NavBar";
+import Notification from "./components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
@@ -52,6 +53,8 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signin signIn={false} />} />
             <Route path="/profile/:id" element={<UserProfile />} />
+            <Route path="/chat" element={<ChatRoom />} />
+            <Route path="/notifications" element={<Notification />} />
           </Routes>
           <NavBar />
         </InfoContext.Provider>
