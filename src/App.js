@@ -17,6 +17,7 @@ import NavBar from "./components/NavBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
+  console.log(process.env);
   const navigation = useNavigate();
   const getUser = () => JSON.parse(localStorage.getItem("user")) || {};
   const [user, setUser] = useState(getUser());
