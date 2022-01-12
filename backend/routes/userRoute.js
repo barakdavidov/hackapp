@@ -8,15 +8,20 @@ router.route('/:id').get((req, res) => {
     const { id } = req.params;
     console.log(`Get user with id: ${id}`);
 });
-router.route('/editprofile/:id').put(auth, (req, res) => {
-    const { id } = req.params;
-    console.log(`Edit user with id: ${id}`);
+router.route('/editprofile').put(auth, (req, res) => {
+    console.log(`Edit user with`);
+});
+router.route('/changepassword').put(auth, (req, res) => {
+    console.log('Change user password');
 });
 router.route('/deleteuser/:id').delete(auth, adminAuth, (req, res) => {
     const { id } = req.params;
     console.log(`Delete user with id: ${id}`);
 });
-
+router.route('/reportuser/:id').post(auth, (req, res) => {
+    const { id } = req.params;
+    console.log(`Report user with id: ${id}`);
+});
 router.route('/signup').post(() => {
     console.log('signup');
 });

@@ -9,7 +9,9 @@ const express = require('express');
 const app = express();
 
 const userRoute = require('./routes/userRoute');
+const routeRoute = require('./routes/routeRoute');
 
+const auth = require('./middleware/authentication');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
@@ -29,7 +31,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/v1/user', userRoute);
-
+app.use('/api/v1/route', auth, routeRoute);
 
 // Error middleware
 app.use(notFoundMiddleware);
