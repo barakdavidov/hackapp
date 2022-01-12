@@ -8,6 +8,8 @@ const rateLimiter = require('express-rate-limit');
 const express = require('express');
 const app = express();
 
+const userRoute = require('./routes/userRoute');
+
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
@@ -26,6 +28,8 @@ app.use(xss());
 app.use(express.json());
 
 // Routes
+app.use('/api/v1/user', userRoute);
+
 
 // Error middleware
 app.use(notFoundMiddleware);
