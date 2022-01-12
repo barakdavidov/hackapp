@@ -13,7 +13,7 @@ import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
-import UserProfile from "./components/MatchProfile";
+import UserProfile from "./components/Matches/MatchProfile";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
