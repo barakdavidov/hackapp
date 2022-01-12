@@ -1,5 +1,4 @@
 {
-<<<<<<< Updated upstream
     "name": "roadlink",
     "version": "0.1.0",
     "private": true,
@@ -59,7 +58,6 @@
     "devDependencies": {
         "nodemon": "^2.0.15"
     }
-=======
   "name": "roadlink",
   "version": "0.1.0",
   "private": true,
@@ -103,5 +101,4 @@
       "last 1 safari version"
     ]
   }
->>>>>>> Stashed changes
 }
