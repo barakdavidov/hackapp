@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import InfoContext from "../InfoContext";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -47,12 +48,60 @@ export default function SignUser({ signIn }) {
     lastName: "",
     confirmation: "",
   });
+  const [alert, setAlert] = useState({});
 
   useEffect(() => {
     if (user.email) {
       navigation("/");
     }
   }, [user]);
+
+  useEffect(() => {
+    confirmPassword();
+  }, [userInfo.password, userInfo.confirmation]);
+
+  const confirmPassword = () => {
+    const pattern = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/);
+    const { password, confirmation } = userInfo;
+
+    // If both fields are empty don't show message
+    if (password === "") {
+      setAlert({});
+      return;
+    }
+
+    // Check for right pattern
+    if (!pattern.test(password)) {
+      setAlert({
+        error: true,
+        display: true,
+        severity: "error",
+        msg: "Password must contain at least 8 characters, with one number and one letter",
+      });
+      return;
+    }
+
+    // Check for matching password and confirmation
+    if (confirmation != "") {
+      if (password === confirmation) {
+        setAlert({
+          error: false,
+          display: true,
+          severity: "success",
+          msg: "Password and confirmation valid!",
+        });
+      } else {
+        setAlert({
+          error: true,
+          display: true,
+          severity: "error",
+          msg: "Password and confirmation must match",
+        });
+      }
+    } else {
+      setAlert({});
+    }
+  };
 
   const handleChange = ({ target }) => {
     setUserInfo({ ...userInfo, [target.id]: target.value });
@@ -61,8 +110,28 @@ export default function SignUser({ signIn }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(userInfo);
+    if (alert.error) return;
 
-    const { email, firstName, lastName } = userInfo;
+    // Front end workaround, just logging the user locally
+    const { email, firstName, lastName, password, confirmation } = userInfo;
+
+    // check if all fields filled
+    if (
+      login &&
+      (email === "" || password === "") &&
+      !login &&
+      [email, firstName, lastName, password, confirmation].some((f) => f === "")
+    ) {
+      setAlert({
+        error: true,
+        display: true,
+        severity: "error",
+        msg: "Missing fields",
+      });
+      return;
+    }
+
+    // log user locally
     const loggedUser = { email, firstName, lastName };
 
     // for now just logging user info without any authentication
@@ -102,6 +171,7 @@ export default function SignUser({ signIn }) {
         <Typography component="h1" variant="h5">
           {login ? "Sign in" : "Sign up"}
         </Typography>
+        {alert.display && <Alert severity={alert.severity}>{alert.msg}</Alert>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           {!login && (
             <>
@@ -157,15 +227,12 @@ export default function SignUser({ signIn }) {
               fullWidth
               id="confirmation"
               label="Confirm Password"
+              type="password"
               autoComplete="password confirmation"
               value={userInfo.confirmation}
               onChange={handleChange}
             />
           )}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth

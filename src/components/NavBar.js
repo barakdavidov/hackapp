@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
-import InfoContext from "./InfoContext";
 
 export default function NavBar() {
   const linkStyle = {
@@ -17,7 +16,6 @@ export default function NavBar() {
     linkHover: "fec1a5",
     linkVisited: "white",
   };
-  const { user } = useContext(InfoContext);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -25,24 +23,30 @@ export default function NavBar() {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             width: "100%",
-            paddingLeft: "1rem",
-            paddingRight: "1rem",
           }}
         >
-          <Link to="/search" sx={{ color: "white" }}>
-            <HomeOutlinedIcon sx={{ fontSize: "35px" }} />
-          </Link>
-          <Link to={`/profile/${user._id}`} sx={linkStyle}>
-            <AccountCircleOutlinedIcon sx={{ fontSize: "32px" }} />
-          </Link>
-          <Link to="/chat" sx={linkStyle}>
-            <ForumIcon sx={{ fontSize: "32px" }} />
-          </Link>
-          <Link to="/notifications" sx={linkStyle}>
-            <NotificationsIcon sx={{ fontSize: "32px" }} />
-          </Link>
+          <IconButton color="inherit" sx={{ fontSize: "large" }}>
+            <Link to="/profile/:id" sx={linkStyle}>
+              <AccountCircleOutlinedIcon />
+            </Link>
+          </IconButton>
+          <IconButton color="inherit" sx={{ fontSize: "large" }}>
+            <Link to="/search" sx={linkStyle}>
+              <SearchIcon />
+            </Link>
+          </IconButton>
+          <IconButton color="inherit" sx={{ fontSize: "large" }}>
+            <Link to="/chat" sx={linkStyle}>
+              <ForumIcon />
+            </Link>
+          </IconButton>
+          <IconButton color="inherit" sx={{ fontSize: "large" }}>
+            <Link to="/notifications" sx={linkStyle}>
+              <NotificationsIcon />
+            </Link>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </React.Fragment>
