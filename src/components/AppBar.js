@@ -47,9 +47,17 @@ export default function AppBar() {
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <SubwayOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <SubwayOutlinedIcon
+            sx={{
+              mr: "1rem",
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          />{" "}
           <Typography>Ride History</Typography>
         </ListItem>
         <ListItem
@@ -57,9 +65,17 @@ export default function AppBar() {
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <GroupOutlinedIcon
+            sx={{
+              mr: "1rem",
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          />
           <Typography>Matches</Typography>
         </ListItem>
         <ListItem
@@ -68,9 +84,17 @@ export default function AppBar() {
             alignItems: "center",
             justifyItems: "center",
             mb: "1rem",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <InterestsOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <InterestsOutlinedIcon
+            sx={{
+              mr: "1rem",
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          />
           <Typography>Interests</Typography>
         </ListItem>
         <Divider />
@@ -84,7 +108,13 @@ export default function AppBar() {
                 justifyItems: "center",
               }}
             >
-              <SupervisorAccountOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+              <SupervisorAccountOutlinedIcon
+                sx={{
+                  mr: "1rem",
+                  color: "#4F4F4F",
+                  "&:hover": { color: "#F99861" },
+                }}
+              />
               <Typography>Admin Pages</Typography>
             </ListItem>
           </>
