@@ -13,6 +13,7 @@ import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
+import UserProfile from "./components/MatchProfile";
 import NavBar from "./components/NavBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signin signIn={false} />} />
+            <Route path="/profile/:id" element={<UserProfile />} />
           </Routes>
           <NavBar />
         </InfoContext.Provider>
