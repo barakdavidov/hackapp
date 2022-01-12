@@ -22,6 +22,10 @@ router.route('/reportuser/:id').post(auth, (req, res) => {
     const { id } = req.params;
     console.log(`Report user with id: ${id}`);
 });
+router.route('/makeadming/:id').put(auth, adminAuth, (req, res) => {
+    const { id } = req.params;
+    console.log(`Make user with id: ${id} into admin`);
+});
 router.route('/signup').post(() => {
     console.log('signup');
 });
