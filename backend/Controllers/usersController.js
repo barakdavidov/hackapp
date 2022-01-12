@@ -1,89 +1,67 @@
 const userQueries = require("../queries/userQueries");
+const uuidv4 = require('uuid');
+const { StatusCodes } = require('http-status-codes');
 
-exports.login = (req, res) => {
-  try {
-    const token = req.token;
-    res.send({
-      token: token,
-      userInfo: req.body.user,
-      message: "Login Success!",
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e.message);
-  }
+const login = (req, res) => {
+  const token = req.token;
+  res.status(StatusCodes.OK).json({
+    token,
+    userInfo: req.body.user,
+    message: "Login Success!",
+  });
 };
 
-exports.signUpUser = async (req, res) => {
-  try {
-    const { email, bio, password, firstName, lastName, phoneNumber, verifyPassword } =
-      req.body;
-    const userId = uuidv4();
-    await userQueries.signUpUserQuery(
-      email,
-      password,
-      firstName,
-      lastName,
-      phoneNumber,
-      userId,
-      bio,
-      verifyPassword
-    );
-    res.send("Register Successfully!");
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e.message);
-  }
+const signUpUser = async (req, res) => {
+  const { email, bio, password, firstName, lastName, phoneNumber, verifyPassword } =
+    req.body;
+  const userId = uuidv4();
+  await userQueries.signUpUserQuery(
+    userId,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    verifyPassword,
+    bio
+  );
+  res.status(StatusCodes.CREATED).send("Register Successfully!");
 };
 
-exports.updateUserPassword = async (req, res) => {
-  try {
-    const { newPassword, newVerifyPassword } = req.body;
-    const { userId } = req.user;
-    await userQueries.updateUserPasswordQuery(
-      newPassword,
-      newVerifyPassword, userId
-    );
-    res.send("Updated Password Successfully!");
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e.message);
-  }
+const updateUserPassword = async (req, res) => {
+  const { newPassword, newVerifyPassword } = req.body;
+  const { userId } = req.user;
+  await userQueries.updateUserPasswordQuery(
+    newPassword,
+    newVerifyPassword, userId
+  );
+  res.status(StatusCodes.OK).send("Updated Password Successfully!");
 };
 
-exports.updateUserProfile = async (req, res) => {
-  try {
-    const { email, firstName, lastName, phoneNumber, bio } = req.body;
-    await userQueries.updateUserProfileQuery(
-      email,
-      firstName,
-      lastName,
-      phoneNumber,
-      bio
-    );
-    res.send("Updated Profile Successfully!");
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e.message);
-  }
+const updateUserProfile = async (req, res) => {
+  const { email, firstName, lastName, phoneNumber, bio } = req.body;
+  await userQueries.updateUserProfileQuery(
+    email,
+    firstName,
+    lastName,
+    phoneNumber,
+    bio
+  );
+  res.status(StatusCodes.OK).send("Updated Profile Successfully!");
 };
 
-exports.makeAdmin = async (req, res) => {
-  try {
-    const {userId} = req.body;
-    await userQueries.makeAdminQuery(
-      userId
-    );
-    res.send("Updated Admin Successfully!");
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e.message);
-  }
+const makeAdmin = async (req, res) => {
+  const { id } = req.params;
+  await userQueries.makeAdminQuery(
+    id
+  );
+  res.status(StatusCodes.OK).send("Updated Admin Successfully!");
 };
 
-
-
-
-
-
-
+module.exports = {
+  makeAdmin,
+  updateUserPassword,
+  updateUserProfile,
+  login,
+  signUpUser
+};
