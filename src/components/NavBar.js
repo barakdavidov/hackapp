@@ -14,8 +14,8 @@ export default function NavBar() {
     textDecoration: "none",
     color: "white",
     linkHover: "fec1a5",
+    linkVisited: "white",
   };
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -28,22 +28,22 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/profile/:id" sx={{ linkStyle }}>
+            <Link to="/profile/:id" sx={linkStyle}>
               <AccountCircleOutlinedIcon />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/search" sx={{ linkStyle }}>
+            <Link to="/search" sx={linkStyle}>
               <SearchIcon />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/chat" sx={{ linkStyle }}>
+            <Link to="/chat" sx={linkStyle}>
               <ForumIcon />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/notifications" sx={{ linkStyle }}>
+            <Link to="/notifications" sx={linkStyle}>
               <NotificationsIcon />
             </Link>
           </IconButton>
