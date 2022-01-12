@@ -1,22 +1,17 @@
 import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import SettingsIcon from "@mui/icons-material/Settings";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import SubwayOutlinedIcon from "@mui/icons-material/SubwayOutlined";
 import { Typography } from "@mui/material";
-import UserProfile from "./Matches/MatchProfile";
 import InfoContext from "./InfoContext";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
 
 export default function AppBar() {
   const [state, setState] = useState({
@@ -66,6 +61,17 @@ export default function AppBar() {
         >
           <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
           <Typography>Matches</Typography>
+        </ListItem>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+            mb: "1rem",
+          }}
+        >
+          <InterestsOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <Typography>Interests</Typography>
         </ListItem>
         <Divider />
         {user.role === "admin" && (

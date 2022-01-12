@@ -1,4 +1,4 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import { TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
@@ -6,9 +6,11 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import InfoContext from "./InfoContext";
+import { Link, useParams } from "react-router-dom";
 
-export default function ProfilePage() {
+export default function UserProfile() {
   const { user } = useContext(InfoContext);
+  const { userID } = useParams();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +22,21 @@ export default function ProfilePage() {
   const [open, setOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const [userView, setUserView] = useState("");
+
+  const getUser = async () => {
+    try {
+      const res = await axios.get(`http://localHost:5500/users/${userID}`);
+      const userData = res.data;
+      setUserView(userData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [userID]);
 
   const uploadPreviewImage = async (e) => {
     setShowNotification(true);
@@ -46,11 +63,9 @@ export default function ProfilePage() {
     formData.append("bio", bio);
     formData.append("profilePicture", profilePicture);
 
-    const res = await axios.put(
-      `http://localHost:5500/users/update/${user._id}`,
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+    const res = await axios.put(`http://localHost:6000/editprofile`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
     console.log("worked");
     setOpen(true);
     setTimeout(() => {

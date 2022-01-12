@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,6 +8,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
+import InfoContext from "./InfoContext";
 
 export default function NavBar() {
   const linkStyle = {
@@ -16,6 +17,7 @@ export default function NavBar() {
     linkHover: "fec1a5",
     linkVisited: "white",
   };
+  const { user } = useContext(InfoContext);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -32,7 +34,7 @@ export default function NavBar() {
           <Link to="/search" sx={{ color: "white" }}>
             <HomeOutlinedIcon sx={{ fontSize: "35px" }} />
           </Link>
-          <Link to="/profile/:id" sx={linkStyle}>
+          <Link to={`/profile/${user._id}`} sx={linkStyle}>
             <AccountCircleOutlinedIcon sx={{ fontSize: "32px" }} />
           </Link>
           <Link to="/chat" sx={linkStyle}>
