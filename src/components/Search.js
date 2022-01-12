@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import InfoContext from "./InfoContext";
 
@@ -6,7 +7,9 @@ export default function Search() {
   const [results, setResults] = useState([]);
   return (
     <div>
-      <h1>Welcome, {user.firstName}</h1>
+      <Typography variant="h4" sx={{ marginLeft: "1rem", fontWeight: "bold" }}>
+        Welcome, {user.firstName}
+      </Typography>
       <SearchBox setResults={setResults} />
       <SearchResults results={results} />
     </div>

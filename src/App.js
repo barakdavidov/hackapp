@@ -13,6 +13,7 @@ import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search";
+import NavBar from "./components/NavBar";
 
 function App() {
   const navigation = useNavigate();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signin signIn={false} />} />
         </Routes>
+        <NavBar />
       </InfoContext.Provider>
     </div>
   );
