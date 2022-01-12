@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import InfoContext from "./InfoContext";
-import { Typography } from "@mui/material";
+import { Card, Container, Typography } from "@mui/material";
 
 export default function RideHistory() {
   const [routeData, setRouteData] = useState([]);
@@ -22,7 +22,29 @@ export default function RideHistory() {
   }, [user]);
   return (
     <>
-      <Typography variant="h3">Ride History</Typography>
+      <Typography
+        variant="h4"
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        Ride History
+      </Typography>
+
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
+      >
+        {routeData.map((route) => (
+          <Card>
+            <Typography>{route.route}</Typography>
+            <Typography>{route.startCity}</Typography>
+            <Typography>{route.endCity}</Typography>
+            <Typography>{route.rideMatch}</Typography>
+          </Card>
+        ))}
+      </Container>
     </>
   );
 }
