@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -23,30 +23,24 @@ export default function NavBar() {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: "space-between",
             width: "100%",
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
           }}
         >
-          <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/profile/:id" sx={linkStyle}>
-              <AccountCircleOutlinedIcon />
-            </Link>
-          </IconButton>
-          <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/search" sx={linkStyle}>
-              <SearchIcon />
-            </Link>
-          </IconButton>
-          <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/chat" sx={linkStyle}>
-              <ForumIcon />
-            </Link>
-          </IconButton>
-          <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/notifications" sx={linkStyle}>
-              <NotificationsIcon />
-            </Link>
-          </IconButton>
+          <Link to="/search" sx={{ color: "white" }}>
+            <HomeOutlinedIcon sx={{ fontSize: "35px" }} />
+          </Link>
+          <Link to="/profile/:id" sx={linkStyle}>
+            <AccountCircleOutlinedIcon sx={{ fontSize: "32px" }} />
+          </Link>
+          <Link to="/chat" sx={linkStyle}>
+            <ForumIcon sx={{ fontSize: "32px" }} />
+          </Link>
+          <Link to="/notifications" sx={linkStyle}>
+            <NotificationsIcon sx={{ fontSize: "32px" }} />
+          </Link>
         </Toolbar>
       </AppBar>
     </React.Fragment>

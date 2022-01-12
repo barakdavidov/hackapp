@@ -1,132 +1,262 @@
-import React from "react";
-import InfoContext from "./InfoContext";
+import { React, useState, useContext } from "react";
+import { TextField, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
+import InfoContext from "./InfoContext";
 
-export default function Profile() {
-  const { user, setUser } = React.useContext(InfoContext);
-  const [state, setState] = React.useState({
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    phone: user.phone,
-    bio: user.bio || "",
-    password: "",
-    newPassword: "",
-  });
-  const [error, setError] = React.useState("");
-  const [success, setSuccess] = React.useState(false);
+export default function ProfilePage() {
+  const { user } = useContext(InfoContext);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [bio, setBio] = useState("");
+  const [passwordsNotSame, setPasswordsNoteSame] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
 
-  const inputs = [
-    "email",
-    "firstName",
-    "lastName",
-    "phone",
-    "password",
-    "newPassword",
-    "bio",
-  ];
+  const uploadPreviewImage = async (e) => {
+    setShowNotification(true);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setProfilePicture(reader.result);
+    };
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const res = await axios.put(
-        "http://localhost:8000/editprofile/" + user.id,
-        state
-      );
-      setUser(res.data);
-      localStorage.removeItem("user");
-      localStorage.setItem("user", JSON.stringify(res.data));
-      setSuccess(true);
-    } catch (e) {
-      console.log(`ERROR: ${e.response.data}`);
-      setError(e.response.data);
+  const submitUpdateProfile = async (e) => {
+    if (password !== confirmPassword) {
+      setPasswordsNoteSame(true);
+      return;
     }
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("bio", bio);
+    formData.append("profilePicture", profilePicture);
+
+    const res = await axios.put(
+      `http://localHost:5500/users/update/${user._id}`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    console.log("worked");
+    setOpen(true);
+    setTimeout(() => {
+      refreshPage();
+    }, 1000);
+    console.log(res.data);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   return (
-    <div className="formContainer">
-      <form
+    <>
+      <Box
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
-          width: 500,
-          marginTop: "30px",
-          padding: 50,
-          borderRadius: 8,
-          boxShadow: "0px 6px 18px #9E9E9E",
         }}
-        onSubmit={handleSubmit}
       >
-        <div>
-          {error && <Alert severity="error">{error}</Alert>}
-          {success && (
-            <Alert severity="success">User info changed successfully</Alert>
+        <Typography
+          variant="h2"
+          component="div"
+          gutterBottom
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "6rem",
+            marginBottom: "3rem",
+          }}
+        >
+          Edit Your Profile
+        </Typography>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {profilePicture ? (
+            <img
+              src={profilePicture}
+              alt="uploaded"
+              style={{
+                marginLeft: "1rem",
+                borderRadius: "2rem",
+                width: "100px",
+                height: "100px",
+              }}
+            />
+          ) : user.profilePicture ? (
+            <img
+              src={user.profilePicture}
+              alt="profile"
+              style={{
+                marginLeft: "1rem",
+                borderRadius: "2rem",
+                width: "100px",
+                height: "100px",
+              }}
+            />
+          ) : (
+            <img
+              src={`https://www.parkamerica.net/wp-content/uploads/2020/12/placeholder-profile-female.jpg`}
+              alt="profile"
+              style={{
+                marginLeft: "1rem",
+                borderRadius: "2rem",
+                width: "100px",
+                height: "100px",
+              }}
+            />
           )}
-          {inputs.map((inp) =>
-            inp === "bio" ? (
-              <>
-                <label htmlFor="bio">Bio</label>
-                <div>
-                  <textarea
-                    id="bio"
-                    name="bio"
-                    onChange={({ target }) =>
-                      setState((prev) => ({ ...prev, [inp]: target.value }))
-                    }
-                  >
-                    {state.bio || ""}
-                  </textarea>
-                </div>
-              </>
-            ) : (
-              <>
-                <label htmlFor={inp}>
-                  {inp === "firstName"
-                    ? "First Name"
-                    : inp === "lastName"
-                    ? "Last Name"
-                    : inp === "password"
-                    ? "Current Password"
-                    : inp === "newPassword"
-                    ? "New Password"
-                    : inp[0].toUpperCase() + inp.slice(1)}
-                </label>
-                <div>
-                  <input
-                    key={inp}
-                    id={inp}
-                    type={
-                      inp === "password" || inp === "newPassword"
-                        ? "password"
-                        : "text"
-                    }
-                    value={state[inp]}
-                    onChange={({ target }) =>
-                      setState((prev) => ({ ...prev, [inp]: target.value }))
-                    }
-                    placeholder={
-                      inp === "firstName"
-                        ? "First Name"
-                        : inp === "lastName"
-                        ? "Last Name"
-                        : inp[0].toUpperCase() + inp.slice(1)
-                    }
-                    required={inp !== "newPassword"}
-                  />
-                </div>
-              </>
-            )
-          )}
-          <div style={{ width: "200px", margin: "10px", marginLeft: 0 }}>
-            <Button type="submit" variant="outlined">
-              Save changes
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "4rem",
+            }}
+          >
+            <Button
+              variant="contained"
+              component="label"
+              style={{ width: "15rem" }}
+            >
+              Upload An Image
+              <input
+                type="file"
+                name="profilePicture"
+                hidden
+                onChange={uploadPreviewImage}
+              />
             </Button>
+            {showNotification ? (
+              <Typography
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "1rem",
+                }}
+              >
+                Image Added!
+              </Typography>
+            ) : (
+              <Typography
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "0.5rem",
+                }}
+              >
+                Add an image!
+              </Typography>
+            )}
           </div>
-        </div>
-      </form>
-    </div>
+        </Box>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <TextField
+            label={user.firstName}
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            style={{ margin: "1rem", width: "25rem" }}
+          />
+          <TextField
+            label={user.lastName}
+            name="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            style={{ margin: "1rem", width: "25rem" }}
+          />
+          <TextField
+            label={user.email}
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ margin: "1rem", width: "25rem" }}
+          />
+          <TextField
+            label={user.phoneNumber}
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            style={{ margin: "1rem", width: "25rem" }}
+          />
+        </Box>
+
+        <TextField
+          label="Enter Your New Password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ margin: "1rem", width: "25rem" }}
+        />
+        <TextField
+          label="Confirm Password"
+          name="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          style={{ margin: "1rem", width: "25rem" }}
+        />
+        {passwordsNotSame && (
+          <Typography style={{ color: "red" }}>
+            Passwords do not match
+          </Typography>
+        )}
+        <TextField
+          label="Bio"
+          name="bio"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          multiline
+          style={{ margin: "1rem", width: "52rem" }}
+        />
+        <Button
+          variant="contained"
+          component="label"
+          style={{
+            width: "25rem",
+          }}
+          onClick={submitUpdateProfile}
+        >
+          Save
+        </Button>
+      </Box>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Profile Updated
+        </Alert>
+      </Snackbar>
+    </>
   );
 }

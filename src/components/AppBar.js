@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
@@ -11,14 +11,21 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
+import SubwayOutlinedIcon from "@mui/icons-material/SubwayOutlined";
+import { Typography } from "@mui/material";
+import UserProfile from "./Matches/MatchProfile";
+import InfoContext from "./InfoContext";
+import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 
 export default function AppBar() {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+  const { user } = useContext(InfoContext);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -39,28 +46,43 @@ export default function AppBar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {["My Profile", "Contact Us", "Settings", "Drafts"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <SettingsIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+      <List sx={{ mt: "1rem" }}>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+          }}
+        >
+          <SubwayOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <Typography>Ride History</Typography>
+        </ListItem>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+          }}
+        >
+          <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+          <Typography>Matches</Typography>
+        </ListItem>
+        <Divider />
+        {user.role === "admin" && (
+          <>
+            {" "}
+            <ListItem
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyItems: "center",
+              }}
+            >
+              <SupervisorAccountOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+              <Typography>Admin Pages</Typography>
             </ListItem>
-          )
+          </>
         )}
-      </List>
-      <Divider />
-      <List>
-        {["Admin Dashboard", "Requests", "Messages"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <SettingsIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
       </List>
     </Box>
   );
