@@ -5,6 +5,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Chip from "@mui/material/Chip";
 
 export default function SearchBox(props) {
   const { setResults } = props;
@@ -35,43 +37,54 @@ export default function SearchBox(props) {
         <Typography
           variant="h6"
           sx={{
-            margin: "2rem 1rem 0 2rem",
-            paddingTop: ".5rem",
+            margin: "1rem 1rem 0 2rem",
+            paddingTop: "3rem",
             color: "white",
           }}
         >
           Route Search
         </Typography>
-        <TextField
+        <Container
           sx={{
-            margin: "1rem",
-            width: "20rem",
-            bgcolor: "white",
-            borderRadius: "0.5rem",
-          }}
-          variant="outlined"
-        />
-        <FormControl
-          sx={{
-            margin: "1rem",
-            width: "20rem",
-            bgcolor: "white",
-            borderRadius: "0.5rem",
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
           }}
         >
-          <InputLabel id="demo-simple-select-label">Hobbies</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={hobbies}
-            label="Hobbies"
-            onChange={handleChange}
+          <TextField
+            required
+            id="outlined-required"
+            label="What route are you on?"
+            sx={{
+              margin: "1rem",
+              width: "20rem",
+              bgcolor: "white",
+              borderRadius: "0.5rem",
+            }}
+            variant="outlined"
+          />
+          <FormControl
+            sx={{
+              margin: "1rem 1rem 2rem 1rem",
+              width: "20rem",
+              bgcolor: "white",
+              borderRadius: "0.5rem",
+            }}
           >
-            <MenuItem value={10}>Hello</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+            <InputLabel id="demo-simple-select-label">Hobbies</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={hobbies}
+              label="Hobbies"
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>Hello</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+        </Container>
       </Box>
     </Container>
   );
