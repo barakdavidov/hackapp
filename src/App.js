@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import ChatRoom from "./components/Chat/ChatRoom";
-import Signin from "./components/Signin";
+import SignUser from "./components/Auths/SignUser";
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
@@ -50,8 +50,8 @@ function App() {
             <Route path="/" element={<Search />} />
             <Route path="/search" element={<Search />} />
             <Route path="/welcome" element={<Welcome />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signin signIn={false} />} />
+            <Route path="/signin" element={<SignUser />} />
+            <Route path="/signup" element={<SignUser signIn={false} />} />
             <Route path="/profile/:id" element={<UserProfile />} />
             <Route path="/chat" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notification />} />

@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import InfoContext from "./InfoContext";
+import InfoContext from "../InfoContext";
 import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
@@ -32,7 +32,11 @@ function Copyright(props) {
   );
 }
 
-export default function SignIn({ signIn }) {
+/**
+ * Component for both sing in and sign up functionalities
+ * @param {Boolean} signIn is a flag that says if component is rendered as signIn or singUp
+ */
+export default function SignUser({ signIn }) {
   const { user, setUser } = useContext(InfoContext);
   const navigation = useNavigate();
   const [login, setLogin] = useState(signIn !== undefined ? signIn : true);
@@ -61,16 +65,17 @@ export default function SignIn({ signIn }) {
     const { email, firstName, lastName } = userInfo;
     const loggedUser = { email, firstName, lastName };
 
+    // for now just logging user info without any authentication
     setUser(loggedUser);
     localStorage.setItem("user", JSON.stringify(loggedUser));
 
-    /*
+    /* an idea of how it would work with the backend
     const endpoint = login
       ? "http://localhost:8000/login/"
       : "http://localhost:8000/signup/";
 
     try {
-      const res = await axios.post(endpoint, state);
+      const res = await axios.post(endpoint, userInfo);
       setUser(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {
@@ -97,7 +102,7 @@ export default function SignIn({ signIn }) {
         <Typography component="h1" variant="h5">
           {login ? "Sign in" : "Sign up"}
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           {!login && (
             <>
               <TextField
