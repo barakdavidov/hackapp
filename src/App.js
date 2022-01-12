@@ -12,12 +12,25 @@ import Signin from "./components/Signin";
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
+import NavBar from "./components/NavBar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
   const navigation = useNavigate();
   const getUser = () => JSON.parse(localStorage.getItem("user")) || {};
   const [user, setUser] = useState(getUser());
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#FFA487",
+        main: "#F99861",
+        dark: "#FA8099",
+        contrastText: "#fff",
+      },
+    },
+  });
 
   useEffect(() => {
     if (!user.email) {
@@ -27,16 +40,19 @@ function App() {
 
   return (
     <div className="container">
-      <InfoContext.Provider value={{ user, setUser }}>
-        <AppBar />
-        <Routes>
-          <Route path="/" element={<Search />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signin signIn={false} />} />
-        </Routes>
-      </InfoContext.Provider>
+      <ThemeProvider theme={theme}>
+        <InfoContext.Provider value={{ user, setUser }}>
+          <AppBar />
+          <Routes>
+            <Route path="/" element={<Search />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signin signIn={false} />} />
+          </Routes>
+          <NavBar />
+        </InfoContext.Provider>
+      </ThemeProvider>
     </div>
   );
 }
