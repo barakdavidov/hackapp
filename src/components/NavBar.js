@@ -7,6 +7,8 @@ import RouteOutlinedIcon from "@mui/icons-material/RouteOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import ForumIcon from "@mui/icons-material/Forum";
 import Link from "react-router-dom";
 
 export default function NavBar() {
@@ -22,16 +24,16 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <HomeOutlinedIcon />
+            <AccountCircleOutlinedIcon />
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
             <SearchIcon />
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <RouteOutlinedIcon />
+            <ForumIcon />
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <AccountCircleOutlinedIcon />
+            <NotificationsIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
