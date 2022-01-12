@@ -12,7 +12,7 @@ import Signin from "./components/Signin";
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
 import NavBar from "./components/NavBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
