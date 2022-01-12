@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import InfoContext from "./InfoContext";
+import { Typography } from "@mui/material";
 
 export default function RideHistory() {
   const [routeData, setRouteData] = useState([]);
@@ -8,7 +9,7 @@ export default function RideHistory() {
 
   const getRides = async () => {
     try {
-      const res = await axios.get(`http://localHost:5500/route/history`);
+      const res = await axios.get(`http://localHost:6000/route/history`);
       const routeData = res.data;
       setRouteData(routeData);
     } catch (err) {
@@ -19,5 +20,9 @@ export default function RideHistory() {
   useEffect(() => {
     getRides();
   }, [user]);
-  return <div></div>;
+  return (
+    <>
+      <Typography variant="h3">Ride History</Typography>
+    </>
+  );
 }

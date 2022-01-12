@@ -16,6 +16,10 @@ import UserProfile from "./components/Matches/MatchProfile";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import RideHistory from "./components/RideHistory";
+import AdminPage from "./components/AdminPage";
+import MatchProfile from "./components/Matches/MatchProfile";
+import Interests from "./components/Interests";
 
 function App() {
   console.log(process.env);
@@ -54,6 +58,10 @@ function App() {
             <Route path="/profile/:id" element={<UserProfile />} />
             <Route path="/chat" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notification />} />
+            <Route path="/ride-history" element={<RideHistory />} />
+            <Route path="/admin-page" element={<AdminPage />} />
+            <Route path="/matches" element={<MatchProfile />} />
+            <Route path="/interests" element={<Interests />} />
           </Routes>
           <NavBar />
         </InfoContext.Provider>

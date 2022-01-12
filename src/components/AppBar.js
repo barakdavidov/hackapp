@@ -12,6 +12,7 @@ import InfoContext from "./InfoContext";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
+import { Link } from "react-router-dom";
 
 export default function AppBar() {
   const [state, setState] = useState({
@@ -47,10 +48,21 @@ export default function AppBar() {
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
+            justifyContent: "row",
           }}
         >
-          <SubwayOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-          <Typography>Ride History</Typography>
+          <Link
+            to="/ride-history"
+            sx={{
+              textDecoration: "none",
+              color: "#4F4F4F",
+              linkHover: "#F99861",
+              linkVisited: "#4F4F4F",
+            }}
+          >
+            <SubwayOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+            <Typography>Ride History</Typography>
+          </Link>
         </ListItem>
         <ListItem
           sx={{
@@ -59,8 +71,18 @@ export default function AppBar() {
             justifyItems: "center",
           }}
         >
-          <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-          <Typography>Matches</Typography>
+          <Link
+            to="/matches"
+            sx={{
+              textDecoration: "none",
+              color: "#4F4F4F",
+              linkHover: "#F99861",
+              linkVisited: "#4F4F4F",
+            }}
+          >
+            <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+            <Typography>Matches</Typography>
+          </Link>
         </ListItem>
         <ListItem
           sx={{
@@ -70,8 +92,18 @@ export default function AppBar() {
             mb: "1rem",
           }}
         >
-          <InterestsOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-          <Typography>Interests</Typography>
+          <Link
+            to="/interests"
+            sx={{
+              textDecoration: "none",
+              color: "#4F4F4F",
+              linkHover: "#F99861",
+              linkVisited: "#4F4F4F",
+            }}
+          >
+            <InterestsOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+            <Typography>Interests</Typography>
+          </Link>
         </ListItem>
         <Divider />
         {user.role === "admin" && (
@@ -84,8 +116,10 @@ export default function AppBar() {
                 justifyItems: "center",
               }}
             >
-              <SupervisorAccountOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-              <Typography>Admin Pages</Typography>
+              <Link>
+                <SupervisorAccountOutlinedIcon sx={{ mr: "1rem" }} />{" "}
+                <Typography>Admin Pages</Typography>
+              </Link>
             </ListItem>
           </>
         )}
