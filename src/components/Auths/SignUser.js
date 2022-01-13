@@ -45,9 +45,9 @@ export default function SignUser({ signIn }) {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
-    confirmation: "",
+    first_name: "",
+    last_name: "",
+    verifyPassword: "",
   });
   const [alert, setAlert] = useState({});
   const [error, setError] = useState();
@@ -60,11 +60,11 @@ export default function SignUser({ signIn }) {
 
   useEffect(() => {
     confirmPassword();
-  }, [userInfo.password, userInfo.confirmation]);
+  }, [userInfo.password, userInfo.verifyPassword]);
 
   const confirmPassword = () => {
     const pattern = new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/);
-    const { password, confirmation } = userInfo;
+    const { password, verifyPassword } = userInfo;
 
     // If both fields are empty don't show message
     if (password === "") {
@@ -84,8 +84,8 @@ export default function SignUser({ signIn }) {
     }
 
     // Check for matching password and confirmation
-    if (confirmation != "") {
-      if (password === confirmation) {
+    if (verifyPassword != "") {
+      if (password === verifyPassword) {
         setAlert({
           error: false,
           display: true,
@@ -115,14 +115,16 @@ export default function SignUser({ signIn }) {
     if (alert.error) return;
 
     // Front end workaround, just logging the user locally
-    const { email, firstName, lastName, password, confirmation } = userInfo;
+    const { email, first_name, last_name, password, verifyPassword } = userInfo;
 
     // check if all fields filled
     if (
       login &&
       (email === "" || password === "") &&
       !login &&
-      [email, firstName, lastName, password, confirmation].some((f) => f === "")
+      [email, first_name, last_name, password, verifyPassword].some(
+        (f) => f === ""
+      )
     ) {
       setAlert({
         error: true,
@@ -134,7 +136,7 @@ export default function SignUser({ signIn }) {
     }
 
     // log user locally
-    const loggedUser = { email, firstName, lastName };
+    const loggedUser = { email, first_name, last_name };
 
     // for now just logging user info without any authentication
     // setUser(loggedUser);
@@ -142,7 +144,7 @@ export default function SignUser({ signIn }) {
 
     const endpoint = login
       ? "http://localhost:5050/user/login/"
-      : "http://localhost:5050/user/signup/";
+      : "http://localhost:5050/api/v1/user/signup/";
 
     const headers = {
       headers: {
@@ -158,7 +160,10 @@ export default function SignUser({ signIn }) {
       setUser(res.data);
       // localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {
-      console.log(`ERROR: ${e.response.data}`);
+      console.log(`ERROR: ${e.response}`);
+      console.log(`ERROR: ${e.request}`);
+      console.log(`ERROR: ${e.message}`);
+
       setError(e.response.data);
     }
   };
@@ -188,10 +193,10 @@ export default function SignUser({ signIn }) {
                 margin="normal"
                 required
                 fullWidth
-                id="firstName"
+                id="first_name"
                 label="First Name"
                 autoComplete="first name"
-                value={userInfo.firstName}
+                value={userInfo.first_name}
                 onChange={handleChange}
                 autoFocus={!login}
               />
@@ -199,10 +204,10 @@ export default function SignUser({ signIn }) {
                 margin="normal"
                 required
                 fullWidth
-                id="lastName"
+                id="last_name"
                 label="Last Name"
                 autoComplete="last name"
-                value={userInfo.lastName}
+                value={userInfo.last_name}
                 onChange={handleChange}
               />
             </>
@@ -234,11 +239,11 @@ export default function SignUser({ signIn }) {
               margin="normal"
               required
               fullWidth
-              id="confirmation"
+              id="verifyPassword"
               label="Confirm Password"
               type="password"
               autoComplete="password confirmation"
-              value={userInfo.confirmation}
+              value={userInfo.verifyPassword}
               onChange={handleChange}
             />
           )}
