@@ -37,7 +37,7 @@ function App() {
   });
 
   useEffect(() => {
-    if (!user.email) {
+    if (!user || !user.email) {
       navigation("/welcome");
     }
   }, [user]);

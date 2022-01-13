@@ -111,8 +111,11 @@ export default function SignUser({ signIn }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(userInfo);
+    console.log("alert.error", alert.error);
+    console.log(userInfo, alert.error);
     if (alert.error) return;
+
+    console.log("submit1");
 
     // Front end workaround, just logging the user locally
     const { email, first_name, last_name, password, verifyPassword } = userInfo;
@@ -138,6 +141,8 @@ export default function SignUser({ signIn }) {
     // log user locally
     const loggedUser = { email, first_name, last_name };
 
+    console.log("submit2");
+
     // for now just logging user info without any authentication
     // setUser(loggedUser);
     // localStorage.setItem("user", JSON.stringify(loggedUser));
@@ -154,10 +159,12 @@ export default function SignUser({ signIn }) {
     };
 
     try {
+      console.log("submit3");
       const res = await axios.post(endpoint, userInfo, {
         withCredentials: false,
       });
-      setUser(res.data);
+      console.log("res.data", res.data);
+      setUser(res.data.user);
       // localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {
       console.log(`ERROR: ${e.response}`);
