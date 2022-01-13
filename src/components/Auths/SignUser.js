@@ -141,11 +141,18 @@ export default function SignUser({ signIn }) {
     localStorage.setItem("user", JSON.stringify(loggedUser));
 
     const endpoint = login
-      ? "http://localhost:5000/user/login/"
-      : "http://localhost:5000/user/signup/";
+      ? "http://localhost:5050/user/login/"
+      : "http://localhost:5050/user/signup/";
+
+    const headers = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
 
     try {
-      const res = await axios.post(endpoint, userInfo);
+      const res = await axios.post(endpoint, userInfo, headers);
       setUser(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {

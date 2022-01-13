@@ -16,8 +16,13 @@ import RideHistory from "./components/RideHistory";
 import AdminPage from "./components/AdminPage";
 import MatchProfile from "./components/Matches/MatchProfile";
 import Interests from "./components/Interests";
+import axios from "axios";
 
 function App() {
+  axios.defaults.withCredentials = true;
+
+ 
+
   console.log(process.env);
   const navigation = useNavigate();
   const getUser = () => JSON.parse(localStorage.getItem("user")) || {};
