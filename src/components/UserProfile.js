@@ -29,8 +29,7 @@ function UserProfile() {
             src={user.profilePicture}
             alt="profile"
             style={{
-              marginLeft: "1rem",
-              borderRadius: "2rem",
+              borderRadius: "1rem",
               width: "100px",
               height: "100px",
             }}
@@ -40,8 +39,7 @@ function UserProfile() {
             src={`https://www.parkamerica.net/wp-content/uploads/2020/12/placeholder-profile-female.jpg`}
             alt="profile"
             style={{
-              marginLeft: "1rem",
-              borderRadius: "2rem",
+              borderRadius: "1rem",
               width: "100px",
               height: "100px",
             }}
@@ -56,16 +54,48 @@ function UserProfile() {
           alignItems: "center",
         }}
       >
-        <Typography style={{ margin: "1rem", width: "5rem" }}>
+        <Typography
+          style={{
+            width: "5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: "1rem",
+          }}
+        >
           {user.firstName}
         </Typography>
-        <Typography style={{ margin: "1rem", width: "5rem" }}>
+        <Typography
+          style={{
+            width: "5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: "1rem",
+          }}
+        >
           {user.lastName}
         </Typography>
-        <Typography style={{ margin: "1rem", width: "5rem" }}>
+        <Typography
+          style={{
+            width: "5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: "1rem",
+          }}
+        >
           {user.phoneNumber}
         </Typography>
-        <Typography style={{ margin: "1rem", width: "5rem" }}>
+        <Typography
+          style={{
+            width: "5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            marginTop: "1rem",
+          }}
+        >
           {user.bio}
         </Typography>
         <Link to="/user-profile" sx={{ textDecoration: "none" }}>
