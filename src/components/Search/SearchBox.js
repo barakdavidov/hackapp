@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Container, Paper, TextField, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Paper,
+  TextField,
+  Typography,
+  Button,
+  Switch,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,11 +17,14 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import SearchAdvanced from "./SearchAdvanced";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export default function SearchBox(props) {
   const { setResults } = props;
   const [hobbies, setHobbies] = useState("");
   const [checked, setChecked] = useState(false);
+  const [isAdvancedSearch, setIsAdvancedSearch] = React.useState(false);
+
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
 
@@ -80,7 +90,21 @@ export default function SearchBox(props) {
             alignContent: "center",
           }}
         >
-          <TextField
+          <FormControl
+            sx={{ m: 1, minWidth: 120, bgcolor: "white", borderRadius: 4 }}
+          >
+            <Select
+              onChange={handleChange}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+            </Select>
+          </FormControl>
+          {/* <TextField
             required
             id="outlined-required"
             label="What route are you on?"
@@ -88,11 +112,10 @@ export default function SearchBox(props) {
               margin: "1rem",
               width: "20rem",
               bgcolor: "white",
-              borderRadius: "0.5rem",
+              borderRadius: 4,
             }}
-            variant="outlined"
-          />
-          <FormControl
+          /> */}
+          {/* <FormControl
             sx={{
               margin: "1rem 1rem 2rem 1rem",
               width: "20rem",
@@ -117,40 +140,58 @@ export default function SearchBox(props) {
                 </Box>
               )}
               MenuProps={MenuProps}
-            >
-              {/* {hobbies.map((hobby) => (
+            > */}
+          {/* {hobbies.map((hobby) => (
                 <MenuItem key={hobby} value={hobby}>
                   {hobby}
                 </MenuItem>
               ))} */}
-            </Select>
-          </FormControl>
+          {/* </Select>
+          </FormControl> */}
         </Container>
         <Container>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             sx={{ fontSize: "large", mt: "-2rem" }}
             onClick={handleOpen}
           >
             <KeyboardArrowDownOutlinedIcon />
           </IconButton>
-          {checked && <SearchAdvanced />}
+          {checked && <SearchAdvanced />} */}
+          <FormControlLabel
+            style={{
+              margin: 10,
+              marginLeft: 0,
+              marginBottom: 10,
+              color: "white",
+            }}
+            control={<Switch color="default" />}
+            onChange={() =>
+              setIsAdvancedSearch((currentState) => !currentState)
+            }
+            label="Advanced Search"
+            color="white"
+          />
+          {isAdvancedSearch && <SearchAdvanced />}
         </Container>
-        <Button
-          sx={{
-            width: "5rem",
-            bgcolor: "white",
-            color: "primary",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "1rem",
-            position: "relative",
-            left: "16rem",
-          }}
-        >
-          Search
-        </Button>
+        <Box sx={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Button
+            sx={{
+              width: 130,
+              bgcolor: "#FA8099",
+              color: "white",
+              margin: "1rem",
+              position: "relative",
+              borderRadius: 4,
+              ":hover": {
+                bgcolor: "white",
+                color: "#F99861",
+              },
+            }}
+          >
+            Search
+          </Button>
+        </Box>
       </Box>
     </Container>
   );

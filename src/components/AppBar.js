@@ -48,41 +48,36 @@ export default function AppBar() {
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
-            justifyContent: "row",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <Link
-            to="/ride-history"
+          <SubwayOutlinedIcon
             sx={{
-              textDecoration: "none",
+              mr: "1rem",
               color: "#4F4F4F",
-              linkHover: "#F99861",
-              linkVisited: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
             }}
-          >
-            <SubwayOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-            <Typography>Ride History</Typography>
-          </Link>
+          />{" "}
+          <Typography>Ride History</Typography>
         </ListItem>
         <ListItem
           sx={{
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <Link
-            to="/matches"
+          <GroupOutlinedIcon
             sx={{
-              textDecoration: "none",
+              mr: "1rem",
               color: "#4F4F4F",
-              linkHover: "#F99861",
-              linkVisited: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
             }}
-          >
-            <GroupOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-            <Typography>Matches</Typography>
-          </Link>
+          />
+          <Typography>Matches</Typography>
         </ListItem>
         <ListItem
           sx={{
@@ -90,20 +85,18 @@ export default function AppBar() {
             alignItems: "center",
             justifyItems: "center",
             mb: "1rem",
+            color: "#4F4F4F",
+            "&:hover": { color: "#F99861" },
           }}
         >
-          <Link
-            to="/interests"
+          <InterestsOutlinedIcon
             sx={{
-              textDecoration: "none",
+              mr: "1rem",
               color: "#4F4F4F",
-              linkHover: "#F99861",
-              linkVisited: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
             }}
-          >
-            <InterestsOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-            <Typography>Interests</Typography>
-          </Link>
+          />
+          <Typography>Interests</Typography>
         </ListItem>
         <Divider />
         {user.role === "admin" && (
@@ -116,10 +109,14 @@ export default function AppBar() {
                 justifyItems: "center",
               }}
             >
-              <Link>
-                <SupervisorAccountOutlinedIcon sx={{ mr: "1rem" }} />{" "}
-                <Typography>Admin Pages</Typography>
-              </Link>
+              <SupervisorAccountOutlinedIcon
+                sx={{
+                  mr: "1rem",
+                  color: "#4F4F4F",
+                  "&:hover": { color: "#F99861" },
+                }}
+              />
+              <Typography>Admin Pages</Typography>
             </ListItem>
           </>
         )}
