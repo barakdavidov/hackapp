@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function Notification() {
+function Interests() {
   return <div></div>;
 }
+
+export default Interests;

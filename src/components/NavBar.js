@@ -3,10 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import RouteOutlinedIcon from "@mui/icons-material/RouteOutlined";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import ForumIcon from "@mui/icons-material/Forum";
+import { Link } from "react-router-dom";
+import { whiteList } from "xss";
 
 export default function NavBar() {
   return (
@@ -21,16 +23,32 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <HomeOutlinedIcon />
+            <Link to="/search">
+              <HomeOutlinedIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <SearchIcon />
+            <Link to="/user-profile">
+              <AccountCircleOutlinedIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <RouteOutlinedIcon />
+            <Link to="/chat">
+              <ForumIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
+            </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <AccountCircleOutlinedIcon />
+            <Link to="/notifications">
+              <NotificationsIcon
+                sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
+              />
+            </Link>
           </IconButton>
         </Toolbar>
       </AppBar>

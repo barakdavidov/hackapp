@@ -1,24 +1,27 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
+import SubwayOutlinedIcon from "@mui/icons-material/SubwayOutlined";
+import { Typography } from "@mui/material";
+import InfoContext from "./InfoContext";
+import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
+import { Link } from "react-router-dom";
 
 export default function AppBar() {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+  const { user } = useContext(InfoContext);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -39,26 +42,118 @@ export default function AppBar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <List sx={{ mt: "1rem" }}>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Link
+            to="/ride-history"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyItems: "center",
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          >
+            <SubwayOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />{" "}
+            <Typography>Ride History</Typography>
+          </Link>
+        </ListItem>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Link
+            to="/matches"
+            sx={{
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          >
+            <GroupOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />
+            <Typography>Matches</Typography>
+          </Link>
+        </ListItem>
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Link
+            to="/interests"
+            sx={{
+              color: "#4F4F4F",
+              "&:hover": { color: "#F99861" },
+            }}
+          >
+            <InterestsOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />
+            <Typography>Interests</Typography>
+          </Link>
+        </ListItem>
+        <Divider />
+        {user.role === "admin" && (
+          <>
+            {" "}
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyItems: "center",
+              }}
+            >
+              <Link
+                to="/admin-page"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <SupervisorAccountOutlinedIcon
+                  sx={{
+                    mr: "1rem",
+                    color: "#4F4F4F",
+                    "&:hover": { color: "#F99861" },
+                  }}
+                />
+                <Typography>Admin Pages</Typography>
+              </Link>
+            </ListItem>
+          </>
+        )}
       </List>
     </Box>
   );
