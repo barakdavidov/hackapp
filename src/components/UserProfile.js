@@ -48,21 +48,32 @@ function UserProfile() {
           />
         )}
       </Box>
-      <Typography style={{ margin: "1rem", width: "25rem" }}>
-        {user.firstName}
-      </Typography>
-      <Typography style={{ margin: "1rem", width: "25rem" }}>
-        {user.lastName}
-      </Typography>
-      <Typography style={{ margin: "1rem", width: "25rem" }}>
-        {user.phoneNumber}
-      </Typography>
-      <Typography style={{ margin: "1rem", width: "25rem" }}>
-        {user.bio}
-      </Typography>
-      <Link to="/user-profile">
-        <Button>Edit Profile</Button>
-      </Link>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography style={{ margin: "1rem", width: "5rem" }}>
+          {user.firstName}
+        </Typography>
+        <Typography style={{ margin: "1rem", width: "5rem" }}>
+          {user.lastName}
+        </Typography>
+        <Typography style={{ margin: "1rem", width: "5rem" }}>
+          {user.phoneNumber}
+        </Typography>
+        <Typography style={{ margin: "1rem", width: "5rem" }}>
+          {user.bio}
+        </Typography>
+        <Link to="/user-profile" sx={{ textDecoration: "none" }}>
+          <Button variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Edit Profile
+          </Button>
+        </Link>
+      </Container>
     </Container>
   );
 }

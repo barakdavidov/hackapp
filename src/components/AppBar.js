@@ -43,85 +43,115 @@ export default function AppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List sx={{ mt: "1rem" }}>
-        <Link
-          to="/ride-history"
+        <ListItem
           sx={{
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
-            color: "#4F4F4F",
-            "&:hover": { color: "#F99861" },
+            flexDirection: "row",
           }}
         >
-          <SubwayOutlinedIcon
+          <Link
+            to="/ride-history"
             sx={{
-              mr: "1rem",
+              display: "flex",
+              alignItems: "center",
+              justifyItems: "center",
               color: "#4F4F4F",
               "&:hover": { color: "#F99861" },
             }}
-          />{" "}
-          <Typography>Ride History</Typography>
-        </Link>
-        <Link
-          to="/matches"
+          >
+            <SubwayOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />{" "}
+            <Typography>Ride History</Typography>
+          </Link>
+        </ListItem>
+        <ListItem
           sx={{
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
-            color: "#4F4F4F",
-            "&:hover": { color: "#F99861" },
+            flexDirection: "row",
           }}
         >
-          <GroupOutlinedIcon
+          <Link
+            to="/matches"
             sx={{
-              mr: "1rem",
               color: "#4F4F4F",
               "&:hover": { color: "#F99861" },
             }}
-          />
-          <Typography>Matches</Typography>
-        </Link>
-        <Link
-          to="/interests"
+          >
+            <GroupOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />
+            <Typography>Matches</Typography>
+          </Link>
+        </ListItem>
+        <ListItem
           sx={{
             display: "flex",
             alignItems: "center",
             justifyItems: "center",
-            mb: "1rem",
-            color: "#4F4F4F",
-            "&:hover": { color: "#F99861" },
+            flexDirection: "row",
           }}
         >
-          <InterestsOutlinedIcon
+          <Link
+            to="/interests"
             sx={{
-              mr: "1rem",
               color: "#4F4F4F",
               "&:hover": { color: "#F99861" },
             }}
-          />
-          <Typography>Interests</Typography>
-        </Link>
+          >
+            <InterestsOutlinedIcon
+              sx={{
+                mr: "1rem",
+                color: "#4F4F4F",
+                "&:hover": { color: "#F99861" },
+              }}
+            />
+            <Typography>Interests</Typography>
+          </Link>
+        </ListItem>
         <Divider />
         {user.role === "admin" && (
           <>
             {" "}
-            <Link
-              to="/admin-page"
+            <ListItem
               sx={{
                 display: "flex",
+                flexDirection: "row",
                 alignItems: "center",
                 justifyItems: "center",
               }}
             >
-              <SupervisorAccountOutlinedIcon
+              <Link
+                to="/admin-page"
                 sx={{
-                  mr: "1rem",
-                  color: "#4F4F4F",
-                  "&:hover": { color: "#F99861" },
+                  display: "flex",
+                  alignItems: "center",
+                  justifyItems: "center",
+                  flexDirection: "row",
                 }}
-              />
-              <Typography>Admin Pages</Typography>
-            </Link>
+              >
+                <SupervisorAccountOutlinedIcon
+                  sx={{
+                    mr: "1rem",
+                    color: "#4F4F4F",
+                    "&:hover": { color: "#F99861" },
+                  }}
+                />
+                <Typography>Admin Pages</Typography>
+              </Link>
+            </ListItem>
           </>
         )}
       </List>
