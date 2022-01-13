@@ -43,7 +43,8 @@ export default function AppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List sx={{ mt: "1rem" }}>
-        <ListItem
+        <Link
+          to="/ride-history"
           sx={{
             display: "flex",
             alignItems: "center",
@@ -60,8 +61,9 @@ export default function AppBar() {
             }}
           />{" "}
           <Typography>Ride History</Typography>
-        </ListItem>
-        <ListItem
+        </Link>
+        <Link
+          to="/matches"
           sx={{
             display: "flex",
             alignItems: "center",
@@ -78,8 +80,9 @@ export default function AppBar() {
             }}
           />
           <Typography>Matches</Typography>
-        </ListItem>
-        <ListItem
+        </Link>
+        <Link
+          to="/interests"
           sx={{
             display: "flex",
             alignItems: "center",
@@ -97,12 +100,13 @@ export default function AppBar() {
             }}
           />
           <Typography>Interests</Typography>
-        </ListItem>
+        </Link>
         <Divider />
         {user.role === "admin" && (
           <>
             {" "}
-            <ListItem
+            <Link
+              to="/admin-page"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -117,7 +121,7 @@ export default function AppBar() {
                 }}
               />
               <Typography>Admin Pages</Typography>
-            </ListItem>
+            </Link>
           </>
         )}
       </List>
