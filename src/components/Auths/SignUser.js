@@ -137,8 +137,8 @@ export default function SignUser({ signIn }) {
     const loggedUser = { email, firstName, lastName };
 
     // for now just logging user info without any authentication
-    setUser(loggedUser);
-    localStorage.setItem("user", JSON.stringify(loggedUser));
+    // setUser(loggedUser);
+    // localStorage.setItem("user", JSON.stringify(loggedUser));
 
     const endpoint = login
       ? "http://localhost:5050/user/login/"
@@ -152,9 +152,11 @@ export default function SignUser({ signIn }) {
     };
 
     try {
-      const res = await axios.post(endpoint, userInfo, headers);
+      const res = await axios.post(endpoint, userInfo, {
+        withCredentials: false,
+      });
       setUser(res.data);
-      localStorage.setItem("user", JSON.stringify(res.data));
+      // localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {
       console.log(`ERROR: ${e.response.data}`);
       setError(e.response.data);
