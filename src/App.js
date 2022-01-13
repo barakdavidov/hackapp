@@ -7,6 +7,7 @@ import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
+import UserProfileEdit from "./components/UserProfileEdit";
 import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
@@ -40,26 +41,29 @@ function App() {
   }, [user]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <InfoContext.Provider value={{ user, setUser }}>
-        <AppBar />
-        <Routes>
-          <Route path="/" element={<Search />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/signin" element={<SignUser />} />
-          <Route path="/signup" element={<SignUser signIn={false} />} />
-          <Route path="/profile/:id" element={<UserProfile />} />
-          <Route path="/chat" element={<ChatRoom />} />
-          <Route path="/notifications" element={<Notification />} />
-          <Route path="/ride-history" element={<RideHistory />} />
-          <Route path="/admin-page" element={<AdminPage />} />
-          <Route path="/matches" element={<MatchProfile />} />
-          <Route path="/interests" element={<Interests />} />
-        </Routes>
-        <NavBar />
-      </InfoContext.Provider>
-    </ThemeProvider>
+    <div className="container">
+      <ThemeProvider theme={theme}>
+        <InfoContext.Provider value={{ user, setUser }}>
+          <AppBar />
+          <Routes>
+            <Route path="/" element={<Search />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/signin" element={<SignUser />} />
+            <Route path="/signup" element={<SignUser signIn={false} />} />
+            <Route path="/profile-edit/:id" element={<UserProfileEdit />} />
+            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/chat" element={<ChatRoom />} />
+            <Route path="/notifications" element={<Notification />} />
+            <Route path="/ride-history" element={<RideHistory />} />
+            <Route path="/admin-page" element={<AdminPage />} />
+            <Route path="/match-profile" element={<MatchProfile />} />
+            <Route path="/interests" element={<Interests />} />
+          </Routes>
+          <NavBar />
+        </InfoContext.Provider>
+      </ThemeProvider>
+    </div>
   );
 }
 
