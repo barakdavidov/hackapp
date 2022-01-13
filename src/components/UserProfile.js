@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 function UserProfile() {
   const { user } = useContext(InfoContext);
+  console.log(user);
 
   return (
     <Container
@@ -24,9 +25,9 @@ function UserProfile() {
           justifyContent: "center",
         }}
       >
-        {user.profilePicture ? (
+        {user.picture ? (
           <img
-            src={user.profilePicture}
+            src={user.picture}
             alt="profile"
             style={{
               borderRadius: "1rem",
@@ -63,7 +64,7 @@ function UserProfile() {
             marginTop: "1rem",
           }}
         >
-          {user.firstName}
+          {user.first_name}
         </Typography>
         <Typography
           style={{
@@ -74,7 +75,7 @@ function UserProfile() {
             marginTop: "1rem",
           }}
         >
-          {user.lastName}
+          {user.last_name}
         </Typography>
         <Typography
           style={{
@@ -85,7 +86,7 @@ function UserProfile() {
             marginTop: "1rem",
           }}
         >
-          {user.phoneNumber}
+          {user.phone_number}
         </Typography>
         <Typography
           style={{

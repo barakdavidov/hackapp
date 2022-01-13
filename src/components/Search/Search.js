@@ -6,6 +6,8 @@ import SearchResults from "./SearchResults";
 
 export default function Search() {
   const { user } = useContext(InfoContext);
+  console.log(user);
+
   const [results, setResults] = useState([]);
   return (
     <div>
@@ -13,7 +15,7 @@ export default function Search() {
         variant="h4"
         sx={{ margin: "1rem 1rem 1rem 2rem", fontWeight: "bold" }}
       >
-        Welcome, {user.firstName}
+        Welcome, {user.first_name}
       </Typography>
       <SearchBox setResults={setResults} />
       <SearchResults results={results} />

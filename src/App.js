@@ -21,9 +21,6 @@ import axios from "axios";
 function App() {
   axios.defaults.withCredentials = true;
 
- 
-
-  console.log(process.env);
   const navigation = useNavigate();
   const getUser = () => JSON.parse(localStorage.getItem("user")) || {};
   const [user, setUser] = useState(getUser());

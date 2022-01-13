@@ -54,7 +54,7 @@ export default function SignUser({ signIn }) {
 
   useEffect(() => {
     if (user.email) {
-      navigation("/");
+      navigation("/search");
     }
   }, [user]);
 
@@ -84,7 +84,7 @@ export default function SignUser({ signIn }) {
     }
 
     // Check for matching password and confirmation
-    if (verifyPassword != "") {
+    if (verifyPassword !== "") {
       if (password === verifyPassword) {
         setAlert({
           error: false,
@@ -143,7 +143,7 @@ export default function SignUser({ signIn }) {
     // localStorage.setItem("user", JSON.stringify(loggedUser));
 
     const endpoint = login
-      ? "http://localhost:5050/user/login/"
+      ? "http://localhost:5050/api/v1/user/login/"
       : "http://localhost:5050/api/v1/user/signup/";
 
     const headers = {
@@ -179,7 +179,7 @@ export default function SignUser({ signIn }) {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "prima.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">

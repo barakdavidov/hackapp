@@ -11,7 +11,7 @@ function Matchcard() {
 
   const fetchUserList = async () => {
     try {
-      const res = await axios.get(`http://localHost:6000/users/`);
+      const res = await axios.get(`http://localHost:5050/users/`);
       const userListData = res.data;
       setUserList(userListData);
     } catch (err) {

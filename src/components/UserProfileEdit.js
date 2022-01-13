@@ -63,7 +63,7 @@ export default function UserProfile() {
     formData.append("bio", bio);
     formData.append("profilePicture", profilePicture);
 
-    const res = await axios.put(`http://localHost:6000/editprofile`, formData, {
+    const res = await axios.put(`http://localHost:5050/editprofile`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     console.log("worked");
@@ -124,9 +124,9 @@ export default function UserProfile() {
                 height: "100px",
               }}
             />
-          ) : user.profilePicture ? (
+          ) : user.picture ? (
             <img
-              src={user.profilePicture}
+              src={user.picture}
               alt="profile"
               style={{
                 marginLeft: "1rem",
@@ -200,14 +200,14 @@ export default function UserProfile() {
           }}
         >
           <TextField
-            label={user.firstName}
+            label={user.first_name}
             name="firstName"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             style={{ margin: "1rem", width: "25rem" }}
           />
           <TextField
-            label={user.lastName}
+            label={user.last_name}
             name="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -221,7 +221,7 @@ export default function UserProfile() {
             style={{ margin: "1rem", width: "25rem" }}
           />
           <TextField
-            label={user.phoneNumber}
+            label={user.phone_umber}
             name="phoneNumber"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
