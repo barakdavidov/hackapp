@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -23,15 +23,15 @@ export default function NavBar() {
           }}
         >
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/profile/:id">
-              <AccountCircleOutlinedIcon
+            <Link to="/search">
+              <HomeOutlinedIcon
                 sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
               />
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/search">
-              <SearchIcon
+            <Link to="/profile/:id">
+              <AccountCircleOutlinedIcon
                 sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
               />
             </Link>
