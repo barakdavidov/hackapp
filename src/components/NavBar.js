@@ -30,7 +30,7 @@ export default function NavBar() {
             </Link>
           </IconButton>
           <IconButton color="inherit" sx={{ fontSize: "large" }}>
-            <Link to="/profile/:id">
+            <Link to="/user-profile">
               <AccountCircleOutlinedIcon
                 sx={{ color: "white", "&:hover": { color: "#fec1a5" } }}
               />
