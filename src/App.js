@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import ChatRoom from "./components/Chat/ChatRoom";
 import SignUser from "./components/Auths/SignUser";
 import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
-import UserProfile from "./components/Matches/MatchProfile";
+import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -45,28 +40,26 @@ function App() {
   }, [user]);
 
   return (
-    <div className="container">
-      <ThemeProvider theme={theme}>
-        <InfoContext.Provider value={{ user, setUser }}>
-          <AppBar />
-          <Routes>
-            <Route path="/" element={<Search />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/signin" element={<SignUser />} />
-            <Route path="/signup" element={<SignUser signIn={false} />} />
-            <Route path="/profile/:id" element={<UserProfile />} />
-            <Route path="/chat" element={<ChatRoom />} />
-            <Route path="/notifications" element={<Notification />} />
-            <Route path="/ride-history" element={<RideHistory />} />
-            <Route path="/admin-page" element={<AdminPage />} />
-            <Route path="/matches" element={<MatchProfile />} />
-            <Route path="/interests" element={<Interests />} />
-          </Routes>
-          <NavBar />
-        </InfoContext.Provider>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <InfoContext.Provider value={{ user, setUser }}>
+        <AppBar />
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/signin" element={<SignUser />} />
+          <Route path="/signup" element={<SignUser signIn={false} />} />
+          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/chat" element={<ChatRoom />} />
+          <Route path="/notifications" element={<Notification />} />
+          <Route path="/ride-history" element={<RideHistory />} />
+          <Route path="/admin-page" element={<AdminPage />} />
+          <Route path="/matches" element={<MatchProfile />} />
+          <Route path="/interests" element={<Interests />} />
+        </Routes>
+        <NavBar />
+      </InfoContext.Provider>
+    </ThemeProvider>
   );
 }
 
