@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import InfoContext from "../InfoContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -49,6 +50,7 @@ export default function SignUser({ signIn }) {
     confirmation: "",
   });
   const [alert, setAlert] = useState({});
+  const [error, setError] = useState();
 
   useEffect(() => {
     if (user.email) {
@@ -107,7 +109,7 @@ export default function SignUser({ signIn }) {
     setUserInfo({ ...userInfo, [target.id]: target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(userInfo);
     if (alert.error) return;
@@ -138,10 +140,9 @@ export default function SignUser({ signIn }) {
     setUser(loggedUser);
     localStorage.setItem("user", JSON.stringify(loggedUser));
 
-    /* an idea of how it would work with the backend
     const endpoint = login
-      ? "http://localhost:8000/login/"
-      : "http://localhost:8000/signup/";
+      ? "http://localhost:5000/user/login/"
+      : "http://localhost:5000/user/signup/";
 
     try {
       const res = await axios.post(endpoint, userInfo);
@@ -149,9 +150,8 @@ export default function SignUser({ signIn }) {
       localStorage.setItem("user", JSON.stringify(res.data));
     } catch (e) {
       console.log(`ERROR: ${e.response.data}`);
-      // setError(e.response.data);
+      setError(e.response.data);
     }
-    */
   };
 
   return (
@@ -159,13 +159,13 @@ export default function SignUser({ signIn }) {
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 2,
+          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -235,6 +235,7 @@ export default function SignUser({ signIn }) {
           )}
           <Button
             type="submit"
+            fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
