@@ -13,7 +13,8 @@ import InfoContext from "./components/InfoContext";
 import AppBar from "./components/AppBar";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search/Search";
-import UserProfile from "./components/Matches/MatchProfile";
+import UserProfileEdit from "./components/UserProfileEdit";
+import UserProfile from "./components/UserProfile";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -52,7 +53,8 @@ function App() {
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/signin" element={<SignUser />} />
             <Route path="/signup" element={<SignUser signIn={false} />} />
-            <Route path="/profile/:id" element={<UserProfile />} />
+            <Route path="/profile-edit/:id" element={<UserProfileEdit />} />
+            <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/chat" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notification />} />
           </Routes>
